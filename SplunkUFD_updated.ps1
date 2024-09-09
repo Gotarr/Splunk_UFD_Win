@@ -1,11 +1,16 @@
+# Setzt den Pfad des aktuellen Skripts
 $ScriptPfad = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
-# Datei anpassen für Installation oder Update
+
+# Definiert den Namen der Splunk-Installationsdatei
 $SplunkInstaller = "splunkforwarder-9.2.1-78803f08aabb-x64-release.msi"
+
+# Ermittelt den vollqualifizierten Domänennamen (FQDN) des Computers
 $FQDN = (Get-CimInstance -ClassName Win32_ComputerSystem).DNSHostName + "." + (Get-CimInstance -ClassName Win32_ComputerSystem).Domain
 
-# Überprüfen, ob der Splunk Universal Forwarder installiert ist
+# Definiert den Installationspfad des Splunk Universal Forwarders
 $UFInstalledPath = "C:\Program Files\SplunkUniversalForwarder"
 
+# Überprüft, ob der Splunk Universal Forwarder installiert ist
 if (-not (Test-Path -Path $UFInstalledPath)) {
     try {
         Write-Host "Splunk Universal Forwarder wird installiert..."
